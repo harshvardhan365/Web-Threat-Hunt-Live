@@ -1,11 +1,10 @@
 const mongoose = require(`mongoose`);
-mongoose.connect(`mongodb+srv://admin:BB2uZ0YXk0559tUV@cluster0.dmdls8s.mongodb.net/?retryWrites=true&w=majority`,
-{
+mongoose.connect(`mongodb://0.0.0.0:27017/WTH`,{
     useNewUrlParser:true,
     useUnifiedTopology:true,
     // useCreateIndex:true
 }).then(()=>{
-    console.log(`Cloud Database is connected successfully !!!`);
+    console.log(`Mongodb is connected`);
 }).catch((error)=>{
     console.log(`Error occur due to this `,error);
 })
