@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require(`express`);
 const app = express();
 const port = 3000;
@@ -14,6 +15,9 @@ const session = require(`express-session`);
 const shortid = require('shortid');
 const MongoDBStore = require('connect-mongodb-session')(session);
 const addWebsiteCollection = require(`./db/models/add_website`);
+const dotenv = require('dotenv');
+console.log("MongoDB connection string:", process.env.MONGO_CONNECT_URI);
+
 
 const partials_path = path.join(__dirname, `../template/partial/`);
 const hbs = require(`hbs`);
@@ -29,9 +33,10 @@ app.use(express.urlencoded({
 }));
 
 const store = new MongoDBStore({
-    uri: 'mongodb://0.0.0.0:27017/WTH',
-    collection: `mySessions`
-});
+    uri: process.env.MONGO_CONNECT_URI,
+    collection: 'mySessions'
+  });
+  
 //Middleware for auth 
 const isAuth = (req, res, next) => {
     if (req.session.isAuth) {
