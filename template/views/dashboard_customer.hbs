@@ -33,9 +33,17 @@
 
     <!-- Template Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
+     <link rel="stylesheet" href="css/mdb.min.css" />
+       {{>header}}
   </head>
   <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+     <!-- Topbar Start -->
+    {{>topbar}}
+    <!-- Topbar End -->
+     <!-- Navbar Start -->
+    {{>navbar_customer}}
+    <!-- Navbar End -->
+    {{!-- <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <a class="navbar-brand" href="#">Dashboard</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -56,9 +64,9 @@
             <form action="/logout" method="post">
                   <button>Logout</button>
             </form>
-    </nav>
+    </nav> --}}
     {{!-- <form action="/signin_researcher" method="POST"> --}}
-    <div class="container mt-4">
+    {{!-- <div class="container mt-4">
       <div class="card">
         <div class="card-header">
           Customer Portal
@@ -68,7 +76,180 @@
         <p class="card-text">Email: {{user.email}}</p>
         <p class="card-text">Role: <b>Customer</b></p>
         <a href="#" class="btn btn-primary">Edit Profile</a>
+      </div> --}}
+
+       <!-- Start your project here-->
+
+  <div id="preview" class="preview">
+    <div style="display: none;"></div>
+    <div>
+      <div data-draggable="true" style="position: relative;"><!----><!---->
+        <section draggable="false" class="overflow-hidden pt-0" data-v-271253ee="">
+          <section class="mb-10 background-radial-gradient">
+            <style>
+              .background-radial-gradient {
+                background-color: hsl(218, 41%, 15%);
+                background-image: radial-gradient(650px circle at 0% 0%, hsl(218, 41%, 35%) 15%, hsl(218, 41%, 30%) 35%, hsl(218, 41%, 20%) 75%, hsl(218, 41%, 19%) 80%, transparent 100%), radial-gradient(1250px circle at 100% 100%, hsl(218, 41%, 45%) 15%, hsl(218, 41%, 30%) 35%, hsl(218, 41%, 20%) 75%, hsl(218, 41%, 19%) 80%, transparent 100%);
+              }
+            </style>
+            <div class="container px-4 py-5 px-md-5 text-center text-lg-start">
+              <div class="row gx-lg-5 align-items-center">
+                <div class="col-lg-6 mb-5 mb-lg-0">
+                  <h1 class="my-5 display-3 fw-bold ls-tight" style="color: hsl(218, 81%, 95%)"> <span>Welcome {{user.name}}
+                  </span> <br> <span style="color: hsl(218, 81%, 75%)">Add your Site For Free Now!</span> </h1> <a
+                    class="btn  btn-white btn-lg py-3 px-5 mb-2 mb-md-0 me-md-2" data-ripple-color="primary" href="/add_website"
+                    role="button" aria-controls="#picker-editor">ADD WEBSITE</a> <a
+                    class="btn  btn-link btn-lg py-3 px-5 text-white" style="background-color: transparent" href="/team"
+                    role="button" aria-controls="#picker-editor">Learn more</a>
+                </div>
+                <div class="col-lg-6 mb-5 mb-lg-0"> <img
+                    src="img/img2.png" class="w-100 rounded-4 shadow-5"
+                    alt="" aria-controls="#picker-editor"> </div>
+              </div>
+            </div>
+          </section>
+        </section><!---->
       </div>
+      <div data-draggable="true" style="position: relative;"><!----><!---->
+        <section draggable="false" class="container pt-5" data-v-271253ee="">
+          <section class="mb-10 text-center">
+            <h2 class="fw-bold mb-9 text-center">Quick Tutorial</h2>
+            <div class="row gx-lg-5">
+              <div class="col-lg-4 col-md-12 mb-8 mb-lg-0">
+                <div class="card shadow-2-strong h-100">
+                  <div class="d-flex justify-content-center" style="margin-top: -43px">
+                    <div class="p-4 bg-primary rounded-circle shadow-5-strong d-inline-block"> <i
+                        class="fas fa-cubes fa-2x text-white" aria-controls="#picker-editor"></i> </div>
+                  </div>
+                  <div class="card-body">
+                    <h3 class="fw-bold text-primary mb-3">STEP-1</h3>
+                    <h5 class="text-muted mb-3">Add Website</h5>
+                    <p class="text-muted">Go to Add-website and fill the basic form and sumbit it for free now...</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-4 mb-8 mb-lg-0">
+                <div class="card shadow-2-strong h-100">
+                  <div class="d-flex justify-content-center" style="margin-top: -43px">
+                    <div class="p-4 bg-primary rounded-circle shadow-5-strong d-inline-block"> <i
+                        class="fas fa-chart-pie fa-2x text-white" aria-controls="#picker-editor"></i> </div>
+                  </div>
+                  <div class="card-body">
+                    <h3 class="fw-bold text-primary mb-3">STEP-2</h3>
+                    <h5 class="text-muted mb-3">Testing</h5>
+                    <p class="text-muted">Researsher check your site and find vulnerability from your site</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-4 mb-8 mb-lg-0">
+                <div class="card shadow-2-strong h-100">
+                  <div class="d-flex justify-content-center" style="margin-top: -43px">
+                    <div class="p-4 bg-primary rounded-circle shadow-5-strong d-inline-block"> <i
+                        class="fas fa-cogs fa-2x text-white" aria-controls="#picker-editor"></i> </div>
+                  </div>
+                  <div class="card-body">
+                    <h3 class="fw-bold text-primary mb-3">STEP-3</h3>
+                    <h5 class="text-muted mb-3">Report</h5>
+                    <p class="text-muted">Researcher Reach you via your details and repoert and solve your bug on deal</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </section><!---->
+      </div>
+      <div data-draggable="true" style="position: relative;"><!----><!---->
+        <section draggable="false" class="container pt-5" data-v-271253ee="">
+          <section class="mb-10">
+            <div class="d-flex justify-content-center">
+              <div class="text-center" style="max-width: 700px">
+                <p class="text-uppercase text-primary fw-bold mb-4">Features</p>
+                <h2 class="fw-bold mb-4">Why is it so great?</h2>
+                <p class="text-muted mb-5">It is great for budget site where they do not hire testing team so, they can freely use this plateform</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-3 col-md-6 mb-5">
+                <div class="d-flex align-items-start">
+                  <div class="flex-shrink-0"> <i class="fas fa-check-circle fa-lg text-success fa-fw"></i> </div>
+                  <div class="flex-grow-1 ms-3">
+                    <p class="fw-bold mb-1">Support 24/7</p>
+                    <p class="text-muted mb-0">You can Contact us using help and contact form</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-3 col-md-6 mb-5">
+                <div class="d-flex align-items-start">
+                  <div class="flex-shrink-0"> <i class="fas fa-check-circle fa-lg text-success fa-fw"></i> </div>
+                  <div class="flex-grow-1 ms-3">
+                    <p class="fw-bold mb-1">Tracking</p>
+                    <p class="text-muted mb-0">Researcher track the site which you listed</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-3 col-md-6 mb-5">
+                <div class="d-flex align-items-start">
+                  <div class="flex-shrink-0"> <i class="fas fa-check-circle fa-lg text-success fa-fw"></i> </div>
+                  <div class="flex-grow-1 ms-3">
+                    <p class="fw-bold mb-1">Reporting</p>
+                    <p class="text-muted mb-0">Researcher report the bug on deal </p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-3 col-md-6 mb-5">
+                <div class="d-flex align-items-start">
+                  <div class="flex-shrink-0"> <i class="fas fa-check-circle fa-lg text-success fa-fw"></i> </div>
+                  <div class="flex-grow-1 ms-3">
+                    <p class="fw-bold mb-1">Analytics</p>
+                    <p class="text-muted mb-0">Analyse technologyand method by researchers</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-3 col-md-6 mb-5">
+                <div class="d-flex align-items-start">
+                  <div class="flex-shrink-0"> <i class="fas fa-check-circle fa-lg text-success fa-fw"></i> </div>
+                  <div class="flex-grow-1 ms-3">
+                    <p class="fw-bold mb-1">World Wide</p>
+                    <p class="text-muted mb-0">This is world wide plateform for bug bounty.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-3 col-md-6 mb-5">
+                <div class="d-flex align-items-start">
+                  <div class="flex-shrink-0"> <i class="fas fa-check-circle fa-lg text-success fa-fw"></i> </div>
+                  <div class="flex-grow-1 ms-3">
+                    <p class="fw-bold mb-1">Easy to use</p>
+                    <p class="text-muted mb-0">Easy user interface and easy to list your site</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-3 col-md-6 mb-5">
+                <div class="d-flex align-items-start">
+                  <div class="flex-shrink-0"> <i class="fas fa-check-circle fa-lg text-success fa-fw"></i> </div>
+                  <div class="flex-grow-1 ms-3">
+                    <p class="fw-bold mb-1">Frequent updates</p>
+                    <p class="text-muted mb-0">We frequenty changing our site to update it </p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-3 col-md-6 mb-5">
+                <div class="d-flex align-items-start">
+                  <div class="flex-shrink-0"> <i class="fas fa-check-circle fa-lg text-success fa-fw"></i> </div>
+                  <div class="flex-grow-1 ms-3">
+                    <p class="fw-bold mb-1">Responsive</p>
+                    <p class="text-muted mb-0">Responsive and usable from any device on internet</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </section><!---->
+      </div>
+
+
+<!--end of page-->
+      
+
      
     <!-- DASHBOARD-START -->
         
@@ -87,5 +268,7 @@
          }
     }
 </script>
+{{>footer_customer}}
+{{>copyright}}
 
 </html>

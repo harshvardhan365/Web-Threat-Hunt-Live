@@ -1,8 +1,8 @@
 
  <!-- Navbar Start -->
-    <div class="container-fluid bg-white sticky-top" >
+    <div class="container-fluid bg-white sticky-top  bg-light" >
         <div class="container">
-            <nav  class="navbar navbar-expand-lg navbar-light bg-light">
+            <nav  class="navbar navbar-expand-lg navbar-light" style="background-color: rgb(255, 255, 255);">
                 <a href="/index" class="navbar-brand d-lg-none">
                     <h1 class="fw-bold m-0">WebThreatHunt</h1>
                 </a>
@@ -15,8 +15,9 @@
                         <a href="/" class="nav-item nav-link active">Home</a>
                         <a href="/about" class="nav-item nav-link">About</a>
                         <a href="/service" class="nav-item nav-link">Services</a>
-                        <a href="/project" class="nav-item nav-link">Projects</a>
-                        <div class="nav-item dropdown">
+                        <a href="/signup" class="nav-item nav-link">Client</a>
+                        <a href="/signup_researcher" class="nav-item nav-link">Researchers</a>
+                        {{!-- <div class="nav-item dropdown">
                             <a href="/#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
                             <div class="dropdown-menu bg-light rounded-0 rounded-bottom m-0">
                                 <a href="/feature" class="dropdown-item">Features</a>
@@ -25,18 +26,18 @@
                                 <a href="/quote" class="dropdown-item">Quotation</a>
                                 <a href="/404" class="dropdown-item">404 Page</a>
                             </div>
-                        </div>
+                        </div> --}}
                         <a href="/contact" class="nav-item nav-link">Contact</a>
                     </div>
-                    <div class="ms-auto d-none d-lg-block">
-                        <a href="/signup_researcher" class="btn btn-primary rounded-pill py-2 px-3"><b>Researcher Portal</b></a>
-                        <a href="/signup" class="btn btn-primary rounded-pill py-2 px-3"><strong>Customer Portal</strong></a>
+                    <div class="ms-auto d-none d-lg-block" style="padding-right: 7%;">
+                        <a href="/signin_researcher" class="btn btn-primary rounded-pill py-2 px-3"><b>Researcher Portal</b></a>
+                        <a href="/signin_customer" class="btn btn-primary rounded-pill py-2 px-3" style="margin-left: 50px;"><strong>Customer Portal</strong></a>
                     </div>
                     <br>
-                        <div class="form-check form-switch">
+                        {{!-- <div class="form-check form-switch">
                         <input class="form-check-input" type="checkbox" id="theme-toggle" for="theme-toggle">
                         <label  style="color: black;">Dark mode</label>
-                        </div>
+                        </div> --}}
                 </div>
             </nav>
         </div>

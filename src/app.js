@@ -1,41 +1,78 @@
 require('dotenv').config();
-const express = require(`express`);
+const express = require('express');
 const app = express();
 const port = 3000;
-var cors = require('cors')
-const dbpath = require(`./db/db`);
+var cors = require('cors');
+const dbpath = require('./db/db');
 const path = require('path');
-const templates_path = path.join(__dirname, `../template/views/`);
-const register = require(`./db/models/user-registration`);
-const userProblem = require(`./db/models/userdetails`);
-const ResearcherRegisterCollection = require(`./db/models/researcher-register`);
-const bcrypt = require("bcryptjs");
-const contactusCollection = require(`./db/models/contactus`);
-const session = require(`express-session`);
+const templates_path = path.join(__dirname, '../template/views/');
+const register = require('./db/models/user-registration');
+const userProblem = require('./db/models/userdetails');
+const ResearcherRegisterCollection = require('./db/models/researcher-register');
+const bcrypt = require('bcryptjs');
+const contactusCollection = require('./db/models/contactus');
+const session = require('express-session');
 const shortid = require('shortid');
 const MongoDBStore = require('connect-mongodb-session')(session);
-const addWebsiteCollection = require(`./db/models/add_website`);
+const addWebsiteCollection = require('./db/models/add_website');
 const dotenv = require('dotenv');
-console.log("MongoDB connection string:", process.env.MONGO_CONNECT_URI);
+console.log('MongoDB connection string:', process.env.MONGO_CONNECT_URI);
 
+const partials_path = path.join(__dirname, '../template/partial/');
+const hbs = require('hbs');
 
-const partials_path = path.join(__dirname, `../template/partial/`);
-const hbs = require(`hbs`);
-
-app.use(cors())
-app.set(`view engine`, `hbs`);
-hbs.registerPartials(partials_path)
-app.set(`views`, templates_path);
-app.use(express.static(templates_path))
+app.use(cors());
+app.set('view engine', 'hbs');
+hbs.registerPartials(partials_path);
+app.set('views', templates_path);
+app.use(express.static(templates_path));
 app.use(express.json());
-app.use(express.urlencoded({
-    extended: false
-}));
 
-const store = new MongoDBStore({
-    uri: process.env.MONGO_CONNECT_URI,
-    collection: 'mySessions'
-  });
+/***************** Registering AdminBro ******************/
+const AdminBro = require('admin-bro');
+const AdminBroExpress = require('@admin-bro/express');
+const AdminBroMongoose = require('@admin-bro/mongoose');
+
+// Register the Mongoose adapter
+AdminBro.registerAdapter(AdminBroMongoose);
+
+// Create a new instance of AdminBro
+const adminBro = new AdminBro({
+  resources: [
+    { resource: register },
+    { resource: ResearcherRegisterCollection },
+    { resource: addWebsiteCollection },
+    { resource: userProblem },
+    { resource: contactusCollection },
+    // Add more resources as needed
+  ],
+  rootPath: '/admin',
+});
+
+// Build and use the AdminBro router
+const adminRouter = AdminBroExpress.buildAuthenticatedRouter(adminBro, {
+  authenticate: async (email, password) => {
+    if (email === 'admin@webthreathunt.com' && password === 'Password') {
+      // Create a dummy user object
+      const user = {
+        email: 'admin@webthreathunt.com',
+        encryptedPassword: password,
+      };
+      return user;
+    }
+    return null; // Return null if authentication fails
+  },
+  cookiePassword: 'session Key', // Change this to a secure password
+});
+
+app.use(adminBro.options.rootPath, adminRouter);
+
+app.use(express.urlencoded({ extended: false }));
+
+/*************** End of AdminBro *******************/
+
+
+
   
 //Middleware for auth 
 const isAuth = (req, res, next) => {
@@ -45,14 +82,23 @@ const isAuth = (req, res, next) => {
         res.redirect(`/signin_customer`);
     }
 }
-
-app.use(
+const store = new MongoDBStore({
+    uri: process.env.MONGO_CONNECT_URI,
+    collection: 'mySessions'
+  });
+  
+  // Configure session middleware
+  app.use(
     session({
-        secret: "key",
-        resave: false,
-        saveUninitialized: false,
-        store: store
-    }));
+      secret: 'your-secret-key',
+      resave: false,
+      saveUninitialized: false,
+      store: store,
+      cookie: {
+        maxAge: 24 * 60 * 60 * 1000, // Session expiration time (1 day)
+      },
+    })
+  );
 
 
 app.get('/', (req, res) => {
@@ -67,9 +113,7 @@ app.get(`/about`, (req, res) => {
 app.get(`/contact`, (req, res) => {
     res.render(`contact`);
 });
-app.get(`/team`, (req, res) => {
-    res.render(`team`);
-});
+
 app.get(`/service`, (req, res) => {
     res.render(`service`);
 });
@@ -95,9 +139,28 @@ app.get(`/signup_researcher`, (req, res) => {
 app.get(`/dashboard`, isAuth, (req, res) => {
     res.render(`dashboard`);
 });
+app.get(`/logout`, isAuth, (req, res) => {
+    res.render(`index`);
+});
 
 app.get(`/dashboard_customer`, isAuth, (req, res) => {
     res.render(`dashboard_customer`);
+});
+
+app.get(`/contact_researcher`, isAuth, (req, res) => {
+    res.render(`contact_researcher`);
+});
+
+app.get(`/team`, isAuth, (req, res) => {
+    res.render(`team`);
+});
+
+app.get(`/team_client`, isAuth, (req, res) => {
+    res.render(`team_client`);
+});
+
+app.get(`/contact_client`, isAuth, (req, res) => {
+    res.render(`contact_client`);
 });
 
 app.get(`/signin_researcher`, (req, res) => {
@@ -107,8 +170,15 @@ app.get(`/signin_researcher`, (req, res) => {
 app.post('/dashboard_customer', isAuth, (req, res) => {
     res.render('/dashboard_customer');
 });
+
+
+
 app.get('/add_website', isAuth, (req, res) => {
     res.render('add_website');
+});
+
+app.get('/editdashboard', isAuth, (req, res) => {
+    res.render('editdashboard');
 });
 
 // Route handler to display website data
@@ -165,6 +235,7 @@ app.post('/index', async (req, res) => {
         res.status(400).send(error);
     }
 }); // <--- Add this closing brace
+
 
 //Researcher Signup Form sync
 
